@@ -58,3 +58,18 @@ select * from TblName order by ColName1 desc, ColName2,...,ColNamek desc;
 -- Use order by to imitate max function
 select max(ColName) from TblName order by ColName limit 1;
 -- this equals to : select max(ColName) from TblName; 
+
+
+-- search criteria/filter creteria
+select ColName1,...,ColNamek from TblName where ColName1 = value;
+
+-- operators
+-- = :equal to  
+-- <>/!= :not equal to
+-- < :less than
+-- > :greater than
+-- <= :less than or equal to
+-- >= :greater than or eaual to
+-- between A and B: between A and B (included)
+-- is null : is null
+-- is not null: is nnull
