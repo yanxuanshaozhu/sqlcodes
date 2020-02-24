@@ -60,7 +60,7 @@ select max(ColName) from TblName order by ColName limit 1;
 -- this equals to : select max(ColName) from TblName; 
 
 
--- search criteria/filter creteria
+-- Search criteria/filter creteria
 select ColName1,...,ColNamek from TblName where ColName1 = value;
 
 -- operators
@@ -73,3 +73,9 @@ select ColName1,...,ColNamek from TblName where ColName1 = value;
 -- between A and B: between A and B (included)
 -- is null : is null
 -- is not null: is nnull
+
+-- Search pattern
+select * from TblName where ColName like 'a%b_';
+-- % is used to match any arbitrage character
+-- _ is used to match exactly one arbitrage character
+-- both % and _ cannot be used to match null
