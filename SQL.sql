@@ -329,3 +329,89 @@ where TblName1.ColName1 = TblName2.ColName1;
 
 
 
+
+
+
+
+-- Ch15
+
+-- Use table-joining selects
+select ColName1,...,ColNamek from TblName1,TblName2 where condition1;
+-- this equals to: select  ColNam1,...,ColNamek from TblName1 join TblName2 on condition1
+
+-- Join multiple tables;
+select ColName1,...,ColNamek from TblName1,...,TblNamen where condition1 and ... and conditionm
+
+-- Join/Inner join/Cross join
+InMySQL, join = inner join = cross join
+In other DBMS, corss join cannot be used with on, it generates Cartesian product of tables
+
+
+
+
+
+
+
+-- Ch16
+
+-- Alias for Table
+from TblName1 as t1, TblName2 t2
+-- as can be omitted
+
+-- Self join
+select prod_id,prod_name from products where vend_id = (select vend_id from products where prod_id = 'DTNTR');
+select p1.prod_id, p1.prod_name from products as p1, products as p2 where p1.vend_id = p2.vend_id and p2.prod_id = 'DTNTR';
+
+-- Outer join
+left join/left outer join : use the left table as base table
+right join/right outer join: use the right table as base table
+
+
+
+
+
+
+
+-- Ch17
+-- Use union to cmobine multiple select sentences
+select ColName from TblName1 union select ColName from TblName2;
+select ColName from TblName1 union all select ColName from TblName2;
+-- union deletes same rows from different select sentences
+-- union all reserves all rows from every select sentence
+
+-- Order by unions
+select ColName from TblName1 union select ColName from TblName2 order by ColName;
+-- order by reorders all rows from tresult
+
+
+
+
+
+
+
+-- Ch18
+
+-- Only MyISAM rather than InnoDB supports full-text search
+
+-- Choose one column as index 
+fulltext(ColName)
+
+-- Full-text search
+select * from TblName where match(ColName) against(StringPattern);
+
+-- Full-text search with query expression
+select * from TblName where match(ColName) against(StringPattern with query expansion);
+-- setp1: do normal full-text search
+-- step2: MySQL finds more StringPatterns from the resulting rows
+-- step3: do normal full-text search with all StringPatterns
+
+-- Boolean mode full-tesearch
+select * from TblName where match(ColName) against(StringPattern in boolean mode);
+-- + must included
+-- - must nincluded
+-- > include and increase rank
+-- < include and decrease rank
+-- () put words into expression
+-- ~ cancel rank
+-- * match end ofword
+-- "" match words as a whole string
